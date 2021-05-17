@@ -3,10 +3,6 @@
 
 <% request.setCharacterEncoding("utf-8"); %>
 
-<%
-session.setAttribute("MEMBERID", "madvirus");
-session.setAttribute("NAME", "최범균");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +13,7 @@ session.setAttribute("NAME", "최범균");
 </head>
 <body>
 <div class="container">
-	세션 정보를 저장하였습니다.
+	227p
 </div>
 </body>
 </html>
-
-
-
-

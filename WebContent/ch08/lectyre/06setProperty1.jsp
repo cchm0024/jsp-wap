@@ -3,10 +3,6 @@
 
 <% request.setCharacterEncoding("utf-8"); %>
 
-<%
-session.setAttribute("MEMBERID", "madvirus");
-session.setAttribute("NAME", "최범균");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +13,14 @@ session.setAttribute("NAME", "최범균");
 </head>
 <body>
 <div class="container">
-	세션 정보를 저장하였습니다.
+	<form action="06setProperty2.jsp" method="post">
+		제목 : <input type="text" name="title" /> <br>
+		저자 : <input type="text" name="writer" /> <br>
+		가격 : <input type="number" name="price" /> <br>
+		<input type="submit" value="등록" />
+	</form>
 </div>
 </body>
 </html>
-
-
 
 

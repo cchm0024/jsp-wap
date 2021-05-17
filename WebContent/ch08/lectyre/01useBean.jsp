@@ -1,11 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.*" %>
+<%@ page import="ch08.*" %>
+
 
 <% request.setCharacterEncoding("utf-8"); %>
 
 <%
-session.setAttribute("MEMBERID", "madvirus");
-session.setAttribute("NAME", "최범균");
+Book book = new Book();
+book.setTitle("이것이 자바다");
+book.setWriter("신용권");
+
+request.setAttribute("book", book);
 %>
 <!DOCTYPE html>
 <html>
@@ -17,11 +22,7 @@ session.setAttribute("NAME", "최범균");
 </head>
 <body>
 <div class="container">
-	세션 정보를 저장하였습니다.
+	
 </div>
 </body>
 </html>
-
-
-
-

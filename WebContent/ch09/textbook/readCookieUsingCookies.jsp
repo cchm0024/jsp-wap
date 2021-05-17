@@ -1,12 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.*" %>
+<%@ page import="util.*" %>
 
 <% request.setCharacterEncoding("utf-8"); %>
 
 <%
-session.setAttribute("MEMBERID", "madvirus");
-session.setAttribute("NAME", "최범균");
+	Cookies cookies = new Cookies(request);
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +18,10 @@ session.setAttribute("NAME", "최범균");
 </head>
 <body>
 <div class="container">
-	세션 정보를 저장하였습니다.
+	name 쿠키 = <%= cookies.getValue("name") %> <br>
+	<% if (cookies.exists("id")) { %>
+			id 쿠키 = <%= cookies.getValue("id") %>	 <br>
+	<% } %>
 </div>
 </body>
 </html>
-
-
-
-

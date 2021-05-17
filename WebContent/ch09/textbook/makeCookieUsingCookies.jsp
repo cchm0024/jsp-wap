@@ -1,12 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.*" %>
+<%@ page import="util.*" %>
 
 <% request.setCharacterEncoding("utf-8"); %>
 
 <%
-session.setAttribute("MEMBERID", "madvirus");
-session.setAttribute("NAME", "최범균");
+	response.addCookie(Cookies.createCookie("name", "최범균"));
+	response.addCookie(Cookies.createCookie("id", "madvirus", request.getContextPath(), -1));
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +19,7 @@ session.setAttribute("NAME", "최범균");
 </head>
 <body>
 <div class="container">
-	세션 정보를 저장하였습니다.
+	Cookies를 사용하여 쿠키 생성 
 </div>
 </body>
 </html>
-
-
-
-

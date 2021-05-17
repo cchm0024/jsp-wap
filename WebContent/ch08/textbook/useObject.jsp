@@ -3,10 +3,7 @@
 
 <% request.setCharacterEncoding("utf-8"); %>
 
-<%
-session.setAttribute("MEMBERID", "madvirus");
-session.setAttribute("NAME", "최범균");
-%>
+<jsp:useBean id="member" scope="request" class="ch08.MemberInfo"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +14,17 @@ session.setAttribute("NAME", "최범균");
 </head>
 <body>
 <div class="container">
-	세션 정보를 저장하였습니다.
+	<%= member.getName() %> (<%= member.getId() %>) 회원님
+	안녕하세요.	
+	
+	<br>
+	
+	<jsp:getProperty property="name" name="member"/>
+	(<jsp:getProperty property="id" name="member"/>) 회원님
+	안녕하세요.
+	
 </div>
 </body>
 </html>
-
-
 
 
