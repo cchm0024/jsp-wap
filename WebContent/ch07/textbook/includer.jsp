@@ -4,15 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>include 디렉티브</title>
+<title>Insert title here</title>
 </head>
 <body>
-<% 
-int number = 10;
+<%
+	int number = 10;
 %>
 
-<%@include file="includee.jsp" %>
+<%@ include file="/ch07/textbook/includee.jspf" %>
 
-공통변수 DATAFOLDER = "<% dataFolder %>"
+공통변수 DATAFOLDER="<%= dataFolder %>"
 </body>
 </html>
+

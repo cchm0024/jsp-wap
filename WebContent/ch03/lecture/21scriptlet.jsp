@@ -8,16 +8,15 @@
 </head>
 <body>
 <%
-for (int i =0; i < 5; i++) {
+for (int i = 0; i < 5; i++) {
 %>
-<% 
-
-    out.print(i);
+<%= i %> <br>
+<%--
+	out.print(i);
 	out.print("<br>");
-	
-
-	<% 
-}
 --%>
+<%
+}
+%>
 </body>
 </html>

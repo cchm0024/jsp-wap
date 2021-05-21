@@ -1,18 +1,18 @@
 package ch07;
 
 public class Page {
-	private int statr;
+	private int start;
 	private int end;
-	
-	public Page(int statr, int end) {
-		this.statr = statr;
+
+	public Page(int start, int end) {
+		this.start = start;
 		this.end = end;
 	}
-	
-	public int getStatr() {
-		return statr;
+
+	public int getStart() {
+		return start;
 	}
-	
+
 	public int getEnd() {
 		return end;
 	}
