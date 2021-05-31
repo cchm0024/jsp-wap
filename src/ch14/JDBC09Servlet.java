@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class JDBC09Servlet2
  */
-@WebServlet("/JDBC09Servlet2")
+@WebServlet("/JDBC09Servlet")
 public class JDBC09Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

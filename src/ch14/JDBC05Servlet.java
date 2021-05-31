@@ -40,7 +40,7 @@ public class JDBC05Servlet extends HttpServlet {
 
 		String sql = "SELECT DISTINCT City FROM Customers ORDER By city";
 		
-		String url = "jdbc:mysql://13.125.118.27/test"; // 본인 ip
+		String url = "jdbc:mysql://54.180.160.140/test"; // 본인 ip
 		String user = "root";
 		String password = "wnddkdwjdqhcjfl1";
 

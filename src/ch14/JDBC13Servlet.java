@@ -2,11 +2,12 @@ package ch14;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,17 +15,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ch14.bean.Customer;
+
 /**
- * Servlet implementation class JDBC04Servlet
+ * Servlet implementation class JDBC13Servlet
  */
-@WebServlet("/JDBC04Servlet")
-public class JDBC04Servlet extends HttpServlet {
+@WebServlet("/JDBC13Servlet")
+public class JDBC13Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JDBC04Servlet() {
+    public JDBC13Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,15 +36,29 @@ public class JDBC04Servlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		executeJDBC();
-		response.getWriter().print("<h1>jdbc<h1>");
+		
+		String pageStr = request.getParameter("page");
+		int page = 1;
+		if (pageStr != null) {
+			page = Integer.parseInt(pageStr);
+		}
+		
+		List<Customer> list = executeJDBC(page);
+		
+		request.setAttribute("customers", list);
+		
+		String path = "/ch14/jdbc13.jsp";
+		request.getRequestDispatcher(path).forward(request, response);
 	}
 	
-	private void executeJDBC() {
+	private List<Customer> executeJDBC(int page) {
 
-		String sql = "SELECT * "
-				+ "FROM Employees "
-				+ "WHERE EmployeeID = 1";
+		List<Customer> list = new ArrayList<>(); // 리턴할 객체
+		
+		String sql = "SELECT CustomerID, CustomerName, City "
+				+ "FROM Customers "
+				+ "ORDER BY CustomerID "
+				+ "LIMIT " + ((page-1) * 5) + ", 5" ;
 
 		String url = "jdbc:mysql://54.180.160.140/test"; // 본인 ip
 		String user = "root";
@@ -50,11 +67,11 @@ public class JDBC04Servlet extends HttpServlet {
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			// 클래스 로딩
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			
+
 			// 연결
 			con = DriverManager.getConnection(url, user, password);
 
@@ -65,22 +82,13 @@ public class JDBC04Servlet extends HttpServlet {
 			rs = stmt.executeQuery(sql);
 
 			// 결과 탐색
-			if (rs.next()) {
-//				int id = Integer.parseInt(rs.getString(1));
-				int id = rs.getInt(1);
-				String lastname = rs.getString(2);
-				String firstname = rs.getString(3);
-//				String bDate = rs.getString(4);
-				Date bDate = rs.getDate(4);
-				String photo = rs.getString(5);
-				String note = rs.getString(6);
+			while (rs.next()) {
+				Customer customer = new Customer();
+				customer.setId(rs.getInt(1));
+				customer.setName(rs.getString(2));
+				customer.setCity(rs.getString(3));
 				
-				System.out.println(id);
-				System.out.println(lastname);
-				System.out.println(firstname);
-				System.out.println(bDate);
-				System.out.println(photo);
-				System.out.println(note);
+				list.add(customer);
 			}
 
 		} catch (Exception e) {
@@ -114,6 +122,8 @@ public class JDBC04Servlet extends HttpServlet {
 				}
 			}
 		}
+
+		return list;
 
 	}
 

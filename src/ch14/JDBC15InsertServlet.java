@@ -2,11 +2,12 @@ package ch14;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,17 +15,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ch14.bean.Employee;
+
 /**
- * Servlet implementation class JDBC04Servlet
+ * Servlet implementation class JDBC15InsertServlet
  */
-@WebServlet("/JDBC04Servlet")
-public class JDBC04Servlet extends HttpServlet {
+@WebServlet("/JDBC15InsertServlet")
+public class JDBC15InsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JDBC04Servlet() {
+    public JDBC15InsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,56 +36,51 @@ public class JDBC04Servlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		executeJDBC();
-		response.getWriter().print("<h1>jdbc<h1>");
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
-	
-	private void executeJDBC() {
 
-		String sql = "SELECT * "
-				+ "FROM Employees "
-				+ "WHERE EmployeeID = 1";
+	private void executeJDBC(Employee employee) {
+
+		List<Employee> list = new ArrayList<>(); // 리턴할 객체
+		
+		String sql = "INSERT INTO Customers " + 
+				"(LastName, FirstName, Notes ) " + 
+				"VALUES " + 
+				"(?, ?, ? )" ;
 
 		String url = "jdbc:mysql://54.180.160.140/test"; // 본인 ip
 		String user = "root";
 		String password = "wnddkdwjdqhcjfl1";
 
 		Connection con = null;
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			// 클래스 로딩
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			
+
 			// 연결
 			con = DriverManager.getConnection(url, user, password);
 
-			// statement 생성
-			stmt = con.createStatement();
-
+			// preparedStatement 생성
+			stmt = con.prepareStatement(sql);
+			
+			// ? (파라미터)에 값 할당
+			stmt.setString(1, employee.getFirstName());
+			stmt.setString(2, employee.getLastName());
+			stmt.setString(3, employee.getNotes());
+			
 			// 쿼리 실행, 결과(ResultSet) 리턴
-			rs = stmt.executeQuery(sql);
+			int cnt = stmt.executeUpdate();
 
-			// 결과 탐색
-			if (rs.next()) {
-//				int id = Integer.parseInt(rs.getString(1));
-				int id = rs.getInt(1);
-				String lastname = rs.getString(2);
-				String firstname = rs.getString(3);
-//				String bDate = rs.getString(4);
-				Date bDate = rs.getDate(4);
-				String photo = rs.getString(5);
-				String note = rs.getString(6);
-				
-				System.out.println(id);
-				System.out.println(lastname);
-				System.out.println(firstname);
-				System.out.println(bDate);
-				System.out.println(photo);
-				System.out.println(note);
+			if (cnt == 1) {
+				System.out.println("입력 성공");
+			} else {
+				System.out.println("입력 실패");
 			}
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -117,12 +115,5 @@ public class JDBC04Servlet extends HttpServlet {
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }
+

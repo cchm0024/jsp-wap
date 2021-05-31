@@ -2,11 +2,12 @@ package ch14;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,17 +15,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ch14.bean.Employee;
+
 /**
- * Servlet implementation class JDBC04Servlet
+ * Servlet implementation class JDBC12Servlet
  */
-@WebServlet("/JDBC04Servlet")
-public class JDBC04Servlet extends HttpServlet {
+@WebServlet("/JDBC12Servlet")
+public class JDBC12Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JDBC04Servlet() {
+    public JDBC12Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,15 +36,21 @@ public class JDBC04Servlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		executeJDBC();
-		response.getWriter().print("<h1>jdbc<h1>");
+		
+		List<Employee> list = executeJDBC();
+	
+		request.setAttribute("employees", list);
+		
+		String path = "/ch14/jdbc12.jsp";
+		request.getRequestDispatcher(path).forward(request, response);
 	}
 	
-	private void executeJDBC() {
+	private List<Employee> executeJDBC() {
 
-		String sql = "SELECT * "
-				+ "FROM Employees "
-				+ "WHERE EmployeeID = 1";
+		List<Employee> list = new ArrayList<>(); // 리턴할 객체
+		
+		String sql = "SELECT EmployeeID, LastName, FirstName, Notes " + 
+				"FROM Employees ";
 
 		String url = "jdbc:mysql://54.180.160.140/test"; // 본인 ip
 		String user = "root";
@@ -50,11 +59,11 @@ public class JDBC04Servlet extends HttpServlet {
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			// 클래스 로딩
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			
+
 			// 연결
 			con = DriverManager.getConnection(url, user, password);
 
@@ -65,22 +74,14 @@ public class JDBC04Servlet extends HttpServlet {
 			rs = stmt.executeQuery(sql);
 
 			// 결과 탐색
-			if (rs.next()) {
-//				int id = Integer.parseInt(rs.getString(1));
-				int id = rs.getInt(1);
-				String lastname = rs.getString(2);
-				String firstname = rs.getString(3);
-//				String bDate = rs.getString(4);
-				Date bDate = rs.getDate(4);
-				String photo = rs.getString(5);
-				String note = rs.getString(6);
+			while (rs.next()) {
+				Employee employee = new Employee();
+				employee.setId(rs.getInt(1));
+				employee.setLastName(rs.getString(2));
+				employee.setFirstName(rs.getString(3));
+				employee.setNotes(rs.getString(4));
 				
-				System.out.println(id);
-				System.out.println(lastname);
-				System.out.println(firstname);
-				System.out.println(bDate);
-				System.out.println(photo);
-				System.out.println(note);
+				list.add(employee);
 			}
 
 		} catch (Exception e) {
@@ -114,6 +115,8 @@ public class JDBC04Servlet extends HttpServlet {
 				}
 			}
 		}
+
+		return list;
 
 	}
 

@@ -44,7 +44,7 @@ public class JDBC03Servlet extends HttpServlet {
 				+ "FROM Customers "
 				+ "WHERE CustomerID = 2";
 
-		String url = "jdbc:mysql://13.125.118.27/test"; // 본인 ip
+		String url = "jdbc:mysql://54.180.160.140/test"; // 본인 ip
 		String user = "root";
 		String password = "wnddkdwjdqhcjfl1";
 
