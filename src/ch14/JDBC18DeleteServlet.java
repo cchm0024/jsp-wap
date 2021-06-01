@@ -1,23 +1,27 @@
 package ch14;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ch14.bean.Customer;
+import ch14.dao.CustomersDAO;
+
 /**
- * Servlet implementation class JDBC14InserServlet
+ * Servlet implementation class JDBC18Delete
  */
-@WebServlet("/JDBC14InserServlet")
-public class JDBC14Servlet extends HttpServlet {
+@WebServlet("/JDBC18Delete")
+public class JDBC18DeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JDBC14Servlet() {
+    public JDBC18DeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,16 +30,29 @@ public class JDBC14Servlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String id = request.getParameter("id");
+		
+		CustomersDAO customersDao = new CustomersDAO();
+	
+		Customer customer = customersDao.getCustomer(Integer.parseInt(id));
+		request.setAttribute("customer", customer);
+		
+		String path = "/ch14/jdbc18.jsp";
+		request.getRequestDispatcher(path).forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		String id = request.getParameter("id");
+		CustomersDAO customersDAO = new CustomersDAO();
+		
+		customersDAO.deleteCustomer(Integer.parseInt(id));
+		
 		doGet(request, response);
 	}
+	
 
 }

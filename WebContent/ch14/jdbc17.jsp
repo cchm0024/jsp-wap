@@ -10,14 +10,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp" %>
-
 <title>Insert title here</title>
 </head>
 <body>
-<div class="container">
-	<h1>${name }님 조회 완료</h1>
-</div>
+	<div class="container">
+		<form action="" method="post">
+		id: <input type="text" name = "id" value="${employee.id }" readonly> <br>
+		Last Name : <input type="text"  name="lastName" value="${employee.lastName }"> <br>
+		First Name : <input type="text" name="firstName" value="${employee.firstName }"> <br>
+		Notes : <br>
+		 <textarea rows="5"  name = "notes"><c:out value="${employee.notes }"/></textarea>
+		 <br>
+		 <input type="submit" value="수정">
+		</form>
+	</div>
 </body>
 </html>
