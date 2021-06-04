@@ -1,11 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="s2" tagdir="/WEB-INF/tags/sample2"%>
 
-
-<% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,12 +11,23 @@
 <title>Insert title here</title>
 </head>
 <body>
+<c:catch></c:catch>
 <div class="container">
+	<h1>${board.id }번 글 보기</h1>
+	제목 : <br>
+	<input type="text" value="${board.title }" readonly>
+	<br>
+	본문 : <br>
+	<textarea readonly>${board.body }</textarea>
+	<br>
+	작성자 : <br>
+	<input type="text" value="${board.memberIdHidden }" readonly>
+	<br>
+	작성시간 : <br>
+	<input type="text" value="${board.getTimeAgo }" readonly>
+
 	
-	<s2:navber />
 	
-	<h1>환영합니다</h1>
-	<a href="<%= request.getContextPath() %>/sample2/signup">회원가입</a>
 </div>
 </body>
 </html>

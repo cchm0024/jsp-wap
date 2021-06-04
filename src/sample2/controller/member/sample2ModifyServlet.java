@@ -15,7 +15,7 @@ import sample2.dao.MemberDao;
 /**
  * Servlet implementation class sample2ModifyServlet
  */
-@WebServlet("/sample2/modify")
+@WebServlet("/sample2/member/modify")
 public class sample2ModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,7 +39,7 @@ public class sample2ModifyServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+	//	request.setCharacterEncoding("utf-8");
 		
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
@@ -65,7 +65,7 @@ public class sample2ModifyServlet extends HttpServlet {
 		request.setAttribute("message", message);
 		request.setAttribute("member", member);
 		
-		String path = "/WEB-INF/sample2/info.jsp";
+		String path = "/WEB-INF/sample2/member/info.jsp";
 		request.getRequestDispatcher(path).forward(request, response);
 	}
 }

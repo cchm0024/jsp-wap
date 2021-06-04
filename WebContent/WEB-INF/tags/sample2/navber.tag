@@ -5,19 +5,23 @@
 <div>
 	<a href="<%= request.getContextPath() %>/sample2/main">메인</a>
 	|
-	<a href="<%= request.getContextPath() %>/sample2/signup">회원가입</a>
+	<a href="<%= request.getContextPath() %>/sample2/member/signup">회원가입</a>
 	|
 	<c:if test="${empty sessionScope.userLogined }" >
-		<a href="<%= request.getContextPath() %>/sample2/login">로그인</a>
+		<a href="<%= request.getContextPath() %>/sample2/member/login">로그인</a>
 		|
 	</c:if>
 	
-	<c:if test="${not empty sessionScope.userLogined }" >
-		<a href="<%= request.getContextPath() %>/sample2/info">정보보기</a>
+	<c:if test="${not empty sessionScope.userLogined }" >   <!--이아래부터 로그인 이후 가능한것 -->
+		<a href="<%= request.getContextPath() %>/sample2/member/info">정보보기</a>
 		|
-		<a href="<%= request.getContextPath() %>/sample2/logout">로그아웃</a>
+		<a href="<%= request.getContextPath() %>/sample2/member/logout">로그아웃</a>
 		|
-	</c:if>
-	<a href="<%= request.getContextPath() %>/sample2/list">목록보기</a>
+		<a href="<%= request.getContextPath() %>/sample2/board/write">글쓰기</a>
+		|
+	<a href="<%= request.getContextPath() %>/sample2/member/list">회원 목록보기</a>
+		|
+	</c:if>                                  <!-- 요기까지 --> 
+		<a href="<%= request.getContextPath() %>/sample2/board/list">글 목록보기</a> <!-- 여기부터 로그인 없어도 ok -->
 </div>
 
