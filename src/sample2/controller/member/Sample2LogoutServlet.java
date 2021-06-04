@@ -1,4 +1,4 @@
-package sample2.controller;
+package sample2.controller.member;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,20 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import sample2.bean.Member;
-import sample2.dao.MemberDao;
-
 /**
- * Servlet implementation class Sample2RemoveServlet
+ * Servlet implementation class Sample2LogoutServlet
  */
-@WebServlet("/sample2/remove")
-public class Sample2RemoveServlet extends HttpServlet {
+@WebServlet("/sample2/logout")
+public class Sample2LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Sample2RemoveServlet() {
+    public Sample2LogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,24 +27,19 @@ public class Sample2RemoveServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession sesssion = request.getSession();
+		sesssion.invalidate();
+		
+		String path = request.getContextPath() + "/sample2/main";
+		response.sendRedirect(path);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Member member = (Member) session.getAttribute("userLogined");
-		
-		MemberDao dao = new MemberDao();
-		dao.remove(member.getId());
-		
-		session.invalidate();
-		
-		String path = request.getContextPath() + "/sample2/main";
-		response.sendRedirect(path);
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
