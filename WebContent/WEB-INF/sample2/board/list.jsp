@@ -14,31 +14,33 @@
 <body>
 <s2:navber></s2:navber>
 <div class="container">
-   <h1>글 목록</h1>
-   <table class="table table-bordered table-sm">
-      <thead class="thead-light">
-         <tr>
-            <th>id</th>
-            <th>title</th>
-            <th>memberId</th>
-            <th>inserted</th>
-         </tr>
-      </thead>
-      <tbody>
-         <c:forEach items="${boards}" var="board" varStatus="status">
-            <tr>
-               <td>${board.id}</td>
-               <td>
-                  <a href="${pageContext.request.contextPath}/sample2/board/detail?id=${board.id}">
-                     ${board.title}
-                  </a>
-               </td>
-               <td>${board.memberIdHidden}</td>
-               <td>${board.timeAgo}</td>
-            </tr>
-         </c:forEach>
-      </tbody>
-   </table>
+	<h1>글 목록</h1>
+	
+	<table class="table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성시간</th>
+			</tr>
+		</thead>
+	
+		<tbody>
+			<c:forEach items="${boards }" var="board">
+				<tr>
+					<td>${board.boardId }</td>
+					<td>
+						<a href="<%= request.getContextPath() %>/sample2/board/detail?id=${board.boardId}">
+							${board.title }
+						</a> 
+					</td>
+					<td>${board.memberName }</td>
+					<td>${board.timeAgo }</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 </div>
 </body>
 </html>
