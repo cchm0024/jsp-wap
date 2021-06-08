@@ -8,6 +8,15 @@ public class BoardDto {
 	private String title;
 	private String body;
 	private String memberName;
+	private String memberId;
+	
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
 	private Timestamp inserted;
 	
 	public int getBoardId() {
@@ -57,5 +66,6 @@ public class BoardDto {
 			return new SimpleDateFormat("yy/MM/dd").format(this.inserted);
 		}
 	}
+
 }
 

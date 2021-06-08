@@ -25,7 +25,7 @@
 	
 	<c:if test="${not empty message }" >
 		<div>
-			${message }
+			<s2:message/>
 		</div>
 	</c:if>
 </div>

@@ -11,4 +11,6 @@ CREATE TABLE Board
     );
     DESC Board;
     
+    SELECT * FROM Board;
     
+    SELECT * FROM Member;
