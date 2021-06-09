@@ -12,7 +12,7 @@ import sample2.service.comment.CommentService;
 /**
  * Servlet implementation class Sample2CommentRemoveServlet
  */
-@WebServlet("/sample2/comment/remove")s
+@WebServlet("/sample2/comment/remove")
 public class Sample2CommentRemoveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
