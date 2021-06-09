@@ -9,6 +9,7 @@ public class BoardDto {
 	private String body;
 	private String memberName;
 	private String memberId;
+	private Timestamp inserted;
 	
 	public String getMemberId() {
 		return memberId;
@@ -16,8 +17,6 @@ public class BoardDto {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-
-	private Timestamp inserted;
 	
 	public int getBoardId() {
 		return boardId;

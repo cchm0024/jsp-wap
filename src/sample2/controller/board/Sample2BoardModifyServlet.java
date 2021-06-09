@@ -15,13 +15,13 @@ import sample2.dao.BoardDao;
  * Servlet implementation class Sample2BoardModify
  */
 @WebServlet("/sample2/board/modify")
-public class Sample2BoardModify extends HttpServlet {
+public class Sample2BoardModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Sample2BoardModify() {
+    public Sample2BoardModifyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
