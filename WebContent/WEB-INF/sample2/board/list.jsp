@@ -14,7 +14,7 @@
 <body>
 <s2:navber></s2:navber>
 <div class="container">
-	<h1>글 목록</h1>
+	<h1>글 목록 <span>${totalNum }</span></h1>
 	<s2:message></s2:message>
 	<table class="table">
 		<thead>
@@ -34,6 +34,9 @@
 						<a href="<%= request.getContextPath() %>/sample2/board/detail?id=${board.boardId}">
 							${board.title }
 						</a> 
+						<c:if test="${board.numberOfComment != 0 }">
+						<span>[${board.numberOfComment }]</span>
+						</c:if>
 					</td>
 					<td>${board.memberName }</td>
 					<td>${board.timeAgo }</td>

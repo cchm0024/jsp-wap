@@ -109,6 +109,28 @@ public class CommentDao {
 		
 		
 	}
-	
+
+	public int getNumberOfComment(String id, Connection con) {
+		String sql = "SELECT COUNT(*) FROM Comment WHERE member Id = ? ";
+		
+		ResultSet rs = null;
+		
+		try (
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				){
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				return rs.getInt(id);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.close(con);
+		}
+		return 0;
+	}
+
 }
 

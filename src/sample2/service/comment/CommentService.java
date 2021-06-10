@@ -48,7 +48,7 @@ public class CommentService {
 		dao.remove(id, con);
 	
 		DBConnection.close(con);
+}
+	
 	
 }
-}
-

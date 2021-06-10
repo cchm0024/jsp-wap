@@ -11,7 +11,7 @@ public class Comment {
 	private String comment;
 	private Timestamp inserted;
 	private String memberName;
-	
+
 	public String getMemberName() {
 		return memberName;
 	}

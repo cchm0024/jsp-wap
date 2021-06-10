@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import sample2.bean.Member;
 import sample2.dao.MemberDao;
+import sample2.service.member.MemberService;
 
 /**
  * Servlet implementation class Sample2InfoServlet
@@ -18,12 +19,19 @@ import sample2.dao.MemberDao;
 public class Sample2InfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private MemberService service;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Sample2InfoServlet() {
         super();
         // TODO Auto-generated constructor stub
+    }
+    @Override
+    public void init() throws ServletException {
+    	// TODO Auto-generated method stub
+    	super.init();
+    	service = new MemberService();
     }
 
 	/**
@@ -35,7 +43,9 @@ public class Sample2InfoServlet extends HttpServlet {
 		
 		if (member != null) {
 		MemberDao dao = new MemberDao();
-		Member mem = dao.getMember(member.getId()); //세션정보 오래될수도 있고 하니 다시 조회
+//		Member mem = dao.getMember(member.getId()); //세션정보 오래될수도 있고 하니 다시 조회
+//		Member mem = dao.getMember2(member.getId());
+		Member mem = service.getMember(member.getId());
 		
 		request.setAttribute("member", mem);
 		
