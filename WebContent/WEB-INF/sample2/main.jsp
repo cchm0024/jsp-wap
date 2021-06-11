@@ -11,15 +11,20 @@
 <head>
 
 <%@ include file= "/WEB-INF/subModules/bootstrapHeader.jsp" %>
-<title>Insert title here</title>
+<title>메인 페이지</title>
 </head>
 <body>
-<div class="container">
 	
 	<s2:navber />
-	
-	<h1>환영합니다.</h1>
-	<a href="<%= request.getContextPath() %>/sample2/member/signup">회원가입</a>
+<div class="container">
+	<div class="jumbotron">
+	  <h1 class="display-4"><i class="fab fa-java"></i>환영합니다</h1>
+	  <p class="lead">기본 Servlet/JSP로 만든 회원 게시판 어플리케이션입니다.</p>
+	  <hr class="my-4">
+	  <p>프로그래밍을 처음 배워서 만들어 본 게시판 입니다. 회원가입부터 시작해보세요</p>
+	  <a class="btn btn-primary btn-lg" href="<%= request.getContextPath() %>/sample2/member/signup" role="button"><i class="fas fa-user-plus"></i>회원가입</a>
+	   <a class="btn btn-primary btn-lg" href="<%= request.getContextPath() %>/sample2/member/login" role="button"><i class="fas fa-sign-in-alt"></i>로그인</a>
+	</div>
 </div>
 </body>
 </html>

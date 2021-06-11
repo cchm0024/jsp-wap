@@ -14,13 +14,21 @@
 <body>
 <s2:navber></s2:navber>
 <div class="container">
+	<div class="row justify-content-center">
+	<div class="col-8">
 	<h1>로그인</h1>
 	<form method="post" action="${pageContext.request.contextPath }/sample2/member/login">
-		id <br>
-		<input type="text" name="id" > <br>
-		pw <br>
-		<input type="password" name="password"> <br>
-		<input type="submit" value="로그인">
+<div class="form-group">
+			<label for="input1">아이디</label>
+			<input class="form-control" type="text" name="id" id="input1">
+		</div>
+		
+		<div class="form-group">
+			<label for="input2">패스워드</label>
+			<input class="form-control" type="password" name="password" id="input2">
+		</div>
+		
+		<button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>로그인</button>
 	</form>
 	
 	<c:if test="${not empty message }" >
@@ -28,6 +36,8 @@
 			<s2:message/>
 		</div>
 	</c:if>
+	</div>
+	</div>
 </div>
 </body>
 </html>
